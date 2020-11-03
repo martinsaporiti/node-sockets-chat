@@ -19,7 +19,8 @@ socket.on('connect', function() {
     console.log('Connection Stablished');
 
     socket.emit('beginChat', contact, function(resp){
-        console.log('Connected Contacts', resp);
+        // console.log('Connected Contacts', resp);
+        renderizeContacts(resp);
     });
 
 
@@ -42,11 +43,13 @@ socket.on('disconnect', function() {
 // Escuchar información
 socket.on('createMessage', function(message) {
     console.log('Server:', message);
+    renderizeMessage(message, false);
+    scrollBottom();
 });
 
 // Listening contacts changes...
 socket.on('listContacts', function(contacts) {
-    console.log('contacts:',  contacts);
+    renderizeContacts(contacts);
 });
 
 // Private Messages

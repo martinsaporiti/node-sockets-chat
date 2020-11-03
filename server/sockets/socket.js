@@ -20,18 +20,20 @@ io.on('connection', (client) => {
         contacts.addContact(client.id, contact.name, contact.room);
         
         client.broadcast.to(contact.room).emit('listContacts', contacts.getContactsInRoom(contact.room));
-
+        client.broadcast.to(contact.room).emit('createMessage', createMessage('admin', `${contact.name} join the chat`));
         callback(contacts.getContactsInRoom(contact.room));
     });
 
 
+
     // Event for createMessage ... 
-    client.on('createMessage', (data) => {
-
+    client.on('createMessage', (data, callback) => {
+        
         let contact = contacts.getContact(client.id);
-
         let message = createMessage( contact.name, data.message );
+
         client.broadcast.to(contact.room).emit('createMessage', message);
+        callback(message);
 
     });
 
