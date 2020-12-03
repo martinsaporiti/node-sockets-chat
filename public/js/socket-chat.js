@@ -1,6 +1,5 @@
 var socket = io();
 
-
 var params = new URLSearchParams( window.location.search);
 
 if(!params.has('name') || !params.has('room')){
