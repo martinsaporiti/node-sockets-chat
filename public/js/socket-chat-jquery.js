@@ -1,7 +1,6 @@
 
 var params = new URLSearchParams( window.location.search);
 
-
 var divUsuarios = $('#divUsuarios');
 var sendForm = $('#sendForm');
 var txtMessage = $('#txtMessage');
